@@ -27,7 +27,12 @@ class MockLocation {
         LocationFact(
           title: "Summary",
           text: 
-              "Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,389 feet). It is an active stratovolcano that last erupted in 1707. Mount Fuji is a popular destination for tourists and climbers, and it is also considered a sacred site in Japanese culture.",
+              "Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,389 feet). It is an active stratovolcano that last erupted in 1707. Mount Fuji is considered a sacred site in Japanese culture.",
+        ),
+        LocationFact(
+          title: "How to Get There",
+          text:
+              "The most common way to reach Mount Fuji is by taking a train from Tokyo to the nearby town of Kawaguchiko.",
         ),
       ],
     ),
@@ -41,6 +46,11 @@ class MockLocation {
           text: 
               "Kiyomizudera Temple is a historic Buddhist temple located in Kyoto, Japan. It was founded in 778 and is known for its wooden stage that offers stunning views of the city. The temple is also famous for its cherry blossoms in spring and vibrant foliage in autumn.",
         ),
+        LocationFact(
+          title: "How to Get There",
+          text:
+              "Kiyomizudera Temple is located in the eastern part of Kyoto. The nearest train station is Kiyomizu-dera Station on the JR Line. From the station, it's a short walk to the temple.",
+        ),
       ],
     ),
 
@@ -53,6 +63,11 @@ class MockLocation {
           text:
               "Kinkaku-ji (Golden Pavilion) is a famous Buddhist temple in Kyoto, Japan. It was built in 1397 and is covered in gold leaf, giving it a stunning appearance.",
         ),
+        LocationFact(
+          title: "How to Get There",
+          text:
+              "Kinkaku-ji is located in the eastern part of Kyoto. The nearest train station is Kinkaku-ji Station on the JR Line. From the station, it's a short walk to the temple.",
+        ),
       ],
     ),
 
@@ -64,6 +79,11 @@ class MockLocation {
           title: "Summary",
           text:
               "Odaiba is a popular shopping and entertainment district located on a man-made island in Tokyo Bay, Japan. It features a variety of attractions, including shopping malls, museums, and amusement parks. Odaiba is also known for its stunning views of the Tokyo skyline and the iconic Rainbow Bridge.",  
+        ),
+        LocationFact(
+          title: "How to Get There",
+          text:
+              "Odaiba is located in the eastern part of Tokyo. The nearest train station is Odaiba Station on the JR Line. From the station, it's a short walk to the district.",
         ),
       ],
     ),
