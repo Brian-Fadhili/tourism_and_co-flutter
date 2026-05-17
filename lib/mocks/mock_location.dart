@@ -32,7 +32,7 @@ class MockLocation {
         LocationFact(
           title: "How to Get There",
           text:
-              "The most common way to reach Mount Fuji is by taking a train from Tokyo to the nearby town of Kawaguchiko.",
+              "Mount Fuji is located about 100 kilometers southwest of Tokyo. The nearest train station is Fuji Station on the JR Line. From the station, you can take a bus or taxi to the mountain. You can also access Mount Fuji from the nearby towns of Kawaguchiko and Hakone, which offer various transportation options to the mountain. Mount Fuji is a popular destination for hiking and climbing, with several trails leading to the summit. The most popular climbing season is from July to September, when the weather is generally favorable for climbing.",
         ),
       ],
     ),
