@@ -4,6 +4,7 @@ import '../models/location_fact.dart';
 class MockLocation {
   static final List<Location> items = [
     Location(
+      id: 1,
       name: "Arashiyama Bamboo Grove, Kyoto, Japan",
       url: "https://images.pexels.com/photos/37501475/pexels-photo-37501475.jpeg",
       facts: <LocationFact>[
@@ -21,6 +22,7 @@ class MockLocation {
     ),
 
     Location(
+      id: 2,
       name: "Mount Fuji, Japan",
       url: "https://images.pexels.com/photos/31928372/pexels-photo-31928372.jpeg",
       facts: <LocationFact>[
@@ -38,6 +40,7 @@ class MockLocation {
     ),
 
     Location(
+      id: 3,
       name: "Kiyamizudera Temple, Kyoto, Japan",
       url: "https://images.pexels.com/photos/31193853/pexels-photo-31193853.jpeg",
       facts: <LocationFact>[
@@ -55,6 +58,7 @@ class MockLocation {
     ),
 
     Location(
+      id: 4,
       name: "Kinkaku-ji (Golden Pavilion), Kyoto, Japan",
       url: "https://images.pexels.com/photos/31959621/pexels-photo-31959621.jpeg",
       facts: <LocationFact>[
@@ -72,6 +76,7 @@ class MockLocation {
     ),
 
     Location(
+      id: 5,
       name: "Odaiba, Tokyo, Japan",
       url: "https://images.pexels.com/photos/16813072/pexels-photo-16813072.jpeg",
       facts: <LocationFact>[
