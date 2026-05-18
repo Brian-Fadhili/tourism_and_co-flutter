@@ -1,10 +1,15 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'location_fact.dart';
 
-//Represents a location that a user can visit.
+part 'location.g.dart';
+
+@JsonSerializable()
 class Location {
   final String name;
   final String url;
   final List<LocationFact>? facts;
 
   Location({required this.name, required this.url, this.facts});
+
+  factory Location.fromJson(Map<String, dynamic> json) =>_$LocationFromJson(json);
 }
