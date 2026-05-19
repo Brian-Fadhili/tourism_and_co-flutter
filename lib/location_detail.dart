@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'models/location.dart';
-import 'mocks/mock_location.dart';
 import 'styles.dart';
 
-class LocationDetail extends StatelessWidget {
+class LocationDetail extends StatefulWidget {
   final int locationID;
-
   LocationDetail(this.locationID);
 
   @override
-  Widget build(BuildContext context) {
-    var location = MockLocation.fetch(locationID);
+  createState() => _LocationDetailState(locationID);
+}
 
+class _LocationDetailState extends State<LocationDetail> {
+  final int locationID;
+  Location location = Location.blank();
+
+  _LocationDetailState(this.locationID);
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -28,6 +40,16 @@ class LocationDetail extends StatelessWidget {
     );
   }
 
+  void loadData() async {
+    final location = await Location.fetchByID(locationID);
+
+    if (mounted) {
+      setState(() {
+        this.location = location;
+      }); 
+    }
+  }
+
   List<Widget> _renderBody(BuildContext context, Location location) {
     var result = <Widget>[];
 
@@ -38,6 +60,10 @@ class LocationDetail extends StatelessWidget {
 
   List<Widget> _renderFacts(Location location) {
     var result = <Widget>[];
+
+    if (location.facts == null || location.facts!.isEmpty) {
+    return result; // return empty list safely while data loads
+    }
 
     for (int i = 0; i < location.facts!.length; i++) {
       result.add(_sectionTitle(location.facts![i].title));
@@ -61,9 +87,17 @@ class LocationDetail extends StatelessWidget {
   }
 
   Widget _bannerImage(String url, double height) {
+    Image? image;
+    try {
+      if(url.isNotEmpty) {
+        image =Image.network(url, fit: BoxFit.cover);
+      }
+    }catch(e) {
+      print("Could not load image from url: $url");
+    }
     return Container(
       height: height,
-      child: Image.network(url, fit: BoxFit.fitWidth),
+      child: image,
     );
   }
 }

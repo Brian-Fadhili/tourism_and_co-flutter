@@ -1,15 +1,16 @@
 class Endpoint {
-  static const apiScheme = "HTTPS";
-  static const apiHost = "fluttercrashcourse.com";
-  static const prefix = "/api/v1";
+  static const apiScheme = "http";
+  static const apiHost = "localhost";
+  static const apiPort = "80";
+  static const prefix = "/locations_api";
 
   static Uri uri(String path, {Map<String, dynamic>? queryParameters}) {
-    final uri = new Uri(
+    return Uri(
       scheme: apiScheme,
       host: apiHost,
+      port: int.parse(apiPort),
       path: '$prefix$path',
       queryParameters: queryParameters,
     );
-    return uri;
   }
 }
