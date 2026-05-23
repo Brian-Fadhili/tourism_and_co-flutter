@@ -8,17 +8,21 @@ class Location {
   final int id;
   final String name;
   final String url;
+  final String userItinerarySummary;
+  final String tourPackageName;
   final List<LocationFact>? facts;
 
-  Location.blank() : id = 0, name = '', url = '', facts = null;
+  Location.blank() : id = 0, name = '', url = '', userItinerarySummary = '', tourPackageName = '', facts = null;
 
-  Location({required this.id, required this.name, required this.url, this.facts});
+  Location({required this.id, required this.name, required this.url, required this.userItinerarySummary, required this.tourPackageName, required this.facts});
 
   factory Location.fromJson(Map<String, dynamic> json) {
   return Location(
     id: int.parse(json['id'].toString()),
     name: json['name'],
     url: json['url'],
+    userItinerarySummary: json['userItinerarySummary'] ?? '',
+    tourPackageName: json['tourPackageName'] ?? '',
     facts: json['facts'] != null
         ? (json['facts'] as List).map((f) => LocationFact.fromJson(f)).toList()
         : null,
