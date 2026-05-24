@@ -6,6 +6,7 @@ class Styles {
   static const double headerTextSize = 25.0; //_textsizelarge
   static const double defaultTextSize = 16.0; //textsizedefault
   static const double textSizeSmall = 12.0;
+  static const double horizontalDefaultPadding = 12.0;
   static final Color titleTextColor = const Color(0xFFFFFFFF); //textcolorbright
   static final Color headerTextColor =  const Color(0xFF000000); //textcolordefault/strong
   static final Color defaultTextColor = const Color(0xFF666666); //textcolorfaint
@@ -51,5 +52,11 @@ class Styles {
     fontFamily: GoogleFonts.mulish().fontFamily,
     fontSize: textSizeSmall,
     color: defaultTextColor,
+  );
+
+  static final textCTAButton = TextStyle(
+    fontFamily: GoogleFonts.mulish().fontFamily,
+    fontSize: headerTextSize,
+    color: titleTextColor,
   );
 }

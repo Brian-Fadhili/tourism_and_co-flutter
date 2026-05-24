@@ -6,7 +6,6 @@ import 'models/location.dart';
 import 'location_detail.dart';
 import 'styles.dart';
 
-
 const listItemHeight = 245.0;
 
 class LocationList extends StatefulWidget {
@@ -28,15 +27,14 @@ class _LocationListState extends State<LocationList> {
     try {
       if (!mounted) return;
       setState(() => loading = true);
-      
-      // await Future.delayed(Duration(milliseconds: 3000));
-        final locations = await Location.fetchAll();
+
+      // await Future.delayed(Duration(milliseconds: 8000));
+      final locations = await Location.fetchAll();
       if (!mounted) return;
       setState(() {
         this.locations = locations;
         loading = false;
       });
-      
     } catch (e) {
       setState(() => loading = false);
       print("Error loading locations: $e");
@@ -49,13 +47,7 @@ class _LocationListState extends State<LocationList> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text("Locations", style: Styles.titleText),
-        actions: [
-          if(kIsWeb)
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: loadData,
-          )
-        ]
+        actions: [_webRefreshButton(context)],
       ),
       body: RefreshIndicator(
         onRefresh: () => loadData(),
@@ -67,6 +59,12 @@ class _LocationListState extends State<LocationList> {
         ),
       ),
     );
+  }
+
+  Widget _webRefreshButton(BuildContext context) {
+    return kIsWeb
+        ? IconButton(icon: Icon(Icons.refresh), onPressed: loadData)
+        : SizedBox.shrink();
   }
 
   Widget _renderProgressBar(BuildContext context) {
@@ -92,42 +90,18 @@ class _LocationListState extends State<LocationList> {
     return GestureDetector(
       onTap: () => _navigateToLocationDetail(context, location.id),
       child: Container(
-      height: listItemHeight,
-      child: Stack(
-        children: [
-          _tileImage(location.url, listItemHeight, MediaQuery.of(context).size.width),
-          _tileFooter(location),
-        ]
-      )
-    ),
-    );
-    
-  }
-
-  Widget _tileImage(String url, double height, double width) {
-    Widget  image = const SizedBox.shrink();
-    try {
-      image =Image.network(url, fit: BoxFit.cover);
-    }catch(e) {
-      print("Could not load image $url");
-    }
-    return Container(
-      constraints: BoxConstraints.expand(),
-      child: image,
-    );
-  }
-
-  Widget _tileFooter(Location location) {
-    final info = LocationTile(location: location, darkTheme: true);
-    final overLay = Container(
-      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
-      decoration: BoxDecoration(color: Colors.black.withOpacity(0.7)),
-      child: info,
-    );
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [overLay],
+        height: listItemHeight,
+        child: Stack(
+          children: [
+            _tileImage(
+              location.url,
+              listItemHeight,
+              MediaQuery.of(context).size.width,
+            ),
+            _tileFooter(location),
+          ],
+        ),
+      ),
     );
   }
 
@@ -135,6 +109,30 @@ class _LocationListState extends State<LocationList> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => LocationDetail(locationID)),
+    );
+  }
+
+  Widget _tileImage(String url, double height, double width) {
+    Widget image = const SizedBox.shrink();
+    try {
+      image = Image.network(url, fit: BoxFit.cover);
+    } catch (e) {
+      print("Could not load image $url");
+    }
+    return Container(constraints: BoxConstraints.expand(), child: image);
+  }
+
+  Widget _tileFooter(Location location) {
+    final info = LocationTile(location: location, darkTheme: true);
+    final overLay = Container(
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: Styles.horizontalDefaultPadding),
+      decoration: BoxDecoration(color: Colors.black.withOpacity(0.7)),
+      child: info,
+    );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [overLay],
     );
   }
 }
