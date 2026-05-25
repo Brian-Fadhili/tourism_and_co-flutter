@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'components/banner_image.dart';
+import 'components/default_app_bar.dart';
 import 'components/location_tile.dart';
 import 'models/location.dart';
 import 'styles.dart';
@@ -41,11 +43,7 @@ class _LocationDetailState extends State<LocationDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text(location.name, style: Styles.titleText),
-        centerTitle: true,
-      ),
+      appBar: DefaultAppBar(),
       body: Stack(
         children: [
           _renderBody(context, location),
@@ -58,7 +56,7 @@ class _LocationDetailState extends State<LocationDetail> {
   Widget _renderBody(BuildContext context, Location location) {
     var result = <Widget>[];
 
-    result.add(_bannerImage(location.url, bannerImageHeight));
+    result.add(BannerImage(url: location.url, height: bannerImageHeight));
     result.add(_renderHeader());
     result.addAll(_renderFacts(location));
     return SingleChildScrollView(
@@ -68,18 +66,6 @@ class _LocationDetailState extends State<LocationDetail> {
         children: result,
       ),
     );
-  }
-
-  Widget _bannerImage(String url, double height) {
-    Image? image;
-    try {
-      if (url.isNotEmpty) {
-        image = Image.network(url, fit: BoxFit.cover);
-      }
-    } catch (e) {
-      print("Could not load image from url: $url");
-    }
-    return Container(height: height, child: image);
   }
 
   Widget _renderHeader() {
@@ -153,7 +139,6 @@ class _LocationDetailState extends State<LocationDetail> {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Styles.accentColor,
-        foregroundColor: Styles.titleTextColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onPressed: _handleBookPress,

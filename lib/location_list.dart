@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'components/banner_image.dart';
+import 'components/default_app_bar.dart';
 import 'components/location_tile.dart';
 import 'models/location.dart';
 import 'location_detail.dart';
@@ -44,11 +45,7 @@ class _LocationListState extends State<LocationList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text("Locations", style: Styles.titleText),
-        actions: [_webRefreshButton(context)],
-      ),
+      appBar: DefaultAppBar(),
       body: RefreshIndicator(
         onRefresh: () => loadData(),
         child: Column(
@@ -59,12 +56,6 @@ class _LocationListState extends State<LocationList> {
         ),
       ),
     );
-  }
-
-  Widget _webRefreshButton(BuildContext context) {
-    return kIsWeb
-        ? IconButton(icon: Icon(Icons.refresh), onPressed: loadData)
-        : SizedBox.shrink();
   }
 
   Widget _renderProgressBar(BuildContext context) {
@@ -93,11 +84,7 @@ class _LocationListState extends State<LocationList> {
         height: listItemHeight,
         child: Stack(
           children: [
-            _tileImage(
-              location.url,
-              listItemHeight,
-              MediaQuery.of(context).size.width,
-            ),
+            BannerImage(url: location.url, height: listItemHeight),
             _tileFooter(location),
           ],
         ),
@@ -110,16 +97,6 @@ class _LocationListState extends State<LocationList> {
       context,
       MaterialPageRoute(builder: (context) => LocationDetail(locationID)),
     );
-  }
-
-  Widget _tileImage(String url, double height, double width) {
-    Widget image = const SizedBox.shrink();
-    try {
-      image = Image.network(url, fit: BoxFit.cover);
-    } catch (e) {
-      print("Could not load image $url");
-    }
-    return Container(constraints: BoxConstraints.expand(), child: image);
   }
 
   Widget _tileFooter(Location location) {
