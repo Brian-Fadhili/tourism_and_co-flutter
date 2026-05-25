@@ -15,14 +15,11 @@ class LocationDetail extends StatefulWidget {
   LocationDetail(this.locationID);
 
   @override
-  createState() => _LocationDetailState(locationID);
+  createState() => _LocationDetailState();
 }
 
 class _LocationDetailState extends State<LocationDetail> {
-  final int locationID;
   Location location = Location.blank();
-
-  _LocationDetailState(this.locationID);
 
   @override
   void initState() {
@@ -31,7 +28,7 @@ class _LocationDetailState extends State<LocationDetail> {
   }
 
   void loadData() async {
-    final location = await Location.fetchByID(locationID);
+    final location = await Location.fetchByID(widget.locationID);
 
     if (mounted) {
       setState(() {
@@ -59,6 +56,7 @@ class _LocationDetailState extends State<LocationDetail> {
     result.add(BannerImage(url: location.url, height: bannerImageHeight));
     result.add(_renderHeader());
     result.addAll(_renderFacts(location));
+    result.add(_renderBottomSpacer());
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -124,7 +122,7 @@ class _LocationDetailState extends State<LocationDetail> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
+          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.5)),
           height: footerHeight,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -142,7 +140,7 @@ class _LocationDetailState extends State<LocationDetail> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onPressed: _handleBookPress,
-      child: Text('Book', style: Styles.textCTAButton),
+      child: Text('Book'.toUpperCase(), style: Styles.textCTAButton),
     );
   }
 
@@ -151,7 +149,7 @@ class _LocationDetailState extends State<LocationDetail> {
       scheme: 'mailto',
       path: 'inquiries016@gmail.com',
       queryParameters: {
-        'suject': 'Booking Inquiry',
+        'subject': 'Booking Inquiry',
         'body': 'Hello, I would like to book..',
       },
     );
@@ -162,4 +160,8 @@ class _LocationDetailState extends State<LocationDetail> {
       throw 'Could not launch $emailUri';
     }
   }
+
+  Widget _renderBottomSpacer() {
+      return const SizedBox(height: footerHeight);
+    }
 }
