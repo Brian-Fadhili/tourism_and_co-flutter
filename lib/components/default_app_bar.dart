@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tourismandco/styles.dart';
 
-class DefaultAppBar extends AppBar {
-  final Widget title = Text('Tourism & Co', style: Styles.appBarTitle);
-  final IconThemeData iconTheme = IconThemeData(color: Colors.black);
-  final bool centerTitle = true;
-  final Color backgroundColor = Colors.white;
-  final double elevation = 0.5;
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const DefaultAppBar({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text('Tourism & Co', style: Styles.appBarTitle),
+      iconTheme: const IconThemeData(color: Colors.black),
+      centerTitle: true,
+      backgroundColor: Colors.white,
+      elevation: 0.5,
+    );
+  }
 }

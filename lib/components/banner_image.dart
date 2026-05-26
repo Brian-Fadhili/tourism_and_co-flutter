@@ -8,7 +8,7 @@ class BannerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ConstrainedBox(
       constraints: BoxConstraints.expand(height: height),
       child: url.isNotEmpty
           ? Image.network(

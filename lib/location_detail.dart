@@ -162,6 +162,6 @@ class _LocationDetailState extends State<LocationDetail> {
   }
 
   Widget _renderBottomSpacer() {
-      return const SizedBox(height: footerHeight);
-    }
+    return const SizedBox(height: footerHeight);
+  }
 }

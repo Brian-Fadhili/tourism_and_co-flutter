@@ -7,7 +7,7 @@ import 'models/location.dart';
 import 'location_detail.dart';
 import 'styles.dart';
 
-const listItemHeight = 245.0;
+const double listItemHeight = 245.0;
 
 class LocationList extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class LocationList extends StatefulWidget {
 
 class _LocationListState extends State<LocationList> {
   List<Location> locations = [];
-  bool loading = false;
+  bool loading = true;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _LocationListState extends State<LocationList> {
             backgroundColor: Colors.transparent,
             valueColor: AlwaysStoppedAnimation(Colors.blue.shade200),
           )
-        : Container();
+        : const SizedBox.shrink();
   }
 
   Widget _renderListView(BuildContext context) {
@@ -80,7 +80,7 @@ class _LocationListState extends State<LocationList> {
     var location = locations[index];
     return GestureDetector(
       onTap: () => _navigateToLocationDetail(context, location.id),
-      child: Container(
+      child: SizedBox(
         height: listItemHeight,
         child: Stack(
           children: [
@@ -102,8 +102,11 @@ class _LocationListState extends State<LocationList> {
   Widget _tileFooter(Location location) {
     final info = LocationTile(location: location, darkTheme: true);
     final overLay = Container(
-      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: Styles.horizontalDefaultPadding),
-      decoration: BoxDecoration(color: Colors.black.withOpacity(0.7)),
+      padding: EdgeInsets.symmetric(
+        vertical: 5.0,
+        horizontal: Styles.horizontalDefaultPadding,
+      ),
+      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.7)),
       child: info,
     );
     return Column(

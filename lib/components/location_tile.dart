@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tourismandco/models/location.dart';
 import 'package:tourismandco/styles.dart';
 
-const LocationTitleHeight = 100.0;
+const double locationTitleHeight = 100.0;
 
 class LocationTile extends StatelessWidget {
   final Location location;
   final bool darkTheme;
 
-  LocationTile({required this.location, required this.darkTheme});
+  LocationTile({super.key, required this.location, required this.darkTheme});
 
   @override
   Widget build(BuildContext context){
@@ -16,20 +16,19 @@ class LocationTile extends StatelessWidget {
     final subTitle = location.userItinerarySummary.toUpperCase();
     final caption = location.tourPackageName.toUpperCase();
 
-    return Container(
-      padding: EdgeInsets.all(0.0),
-      height: LocationTitleHeight,
+    return SizedBox(
+      height: locationTitleHeight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$title',
+          Text(title,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: darkTheme? Styles.locationTileTitleDark : Styles.locationTileTitleLight
           ),
-          Text('$subTitle', style: Styles.locationTileSubTitle),
-          Text('$caption', style: Styles.locationTileCaption)
+          Text(subTitle, style: Styles.locationTileSubTitle),
+          Text(caption, style: Styles.locationTileCaption)
         ]
       )
     );

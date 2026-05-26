@@ -7,7 +7,8 @@ class LocationFact {
   final String title;
   final String text;
 
-  LocationFact({required this.title, required this.text});
+  const LocationFact({required this.title, required this.text});
 
   factory LocationFact.fromJson(Map<String, dynamic> json) => _$LocationFactFromJson(json); 
+  Map<String, dynamic> toJson() => _$LocationFactToJson(this);
 }
